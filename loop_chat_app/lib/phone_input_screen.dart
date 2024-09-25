@@ -1,76 +1,109 @@
 import 'package:flutter/material.dart';
-import 'otp_verification_screen.dart';
+import 'otp_verification_screen.dart'; // Keeping this import the same
 
 class PhoneInputScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String selectedCountry = "India"; // Default country selection
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Verification Phone Number'),
+        title: Text("Back"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // Bold and centered heading for phone input
             Text(
               'Enter your phone number',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: 10),
+            // Subtitle text below the heading
             Text(
               'Please confirm your region and enter your phone number',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-            SizedBox(height: 30),
-            Row(
-              children: [
-                DropdownButton<String>(
-                  value: '+91',
-                  items: <String>['+91', '+1', '+44', '+62'].map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (_) {},
-                ),
-                Expanded(
-                  child: TextField(
-                    keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
-                      hintText: 'Phone Number',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Spacer(),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    transitionDuration: Duration(milliseconds: 500),
-                    pageBuilder: (_, __, ___) => OtpVerificationScreen(),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      var begin = Offset(1.0, 0.0);
-                      var end = Offset.zero;
-                      var tween = Tween(begin: begin, end: end);
-                      var offsetAnimation = animation.drive(tween);
-                      return SlideTransition(position: offsetAnimation, child: child);
-                    },
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
               ),
-              child: Text('Continue'),
+            ),
+            SizedBox(height: 20),
+
+            // Country selection dropdown
+            DropdownButtonFormField<String>(
+              value: selectedCountry,
+              decoration: InputDecoration(
+                labelText: 'Country',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30), // Circular border
+                ),
+              ),
+              items: <String>['India', 'United States', 'United Kingdom', 'Australia']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                // Handle country selection change
+                selectedCountry = newValue!;
+              },
+            ),
+            SizedBox(height: 20),
+
+            // Phone input field with circular border
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Phone Number',
+                prefixIcon: Icon(Icons.phone),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30), // Circular border
+                ),
+              ),
+              keyboardType: TextInputType.phone,
+            ),
+            SizedBox(height: 20),
+
+            // Full-width button with updated style
+            SizedBox(
+              width: double.infinity, // Full width
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(milliseconds: 500),
+                      pageBuilder: (_, __, ___) => VerificationCodeScreen(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        var begin = Offset(1.0, 0.0);
+                        var end = Offset.zero;
+                        var tween = Tween(begin: begin, end: end);
+                        var offsetAnimation = animation.drive(tween);
+                        return SlideTransition(position: offsetAnimation, child: child);
+                      },
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black, // Black button background
+                  foregroundColor: Colors.white, // White button text
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30), // Circular button
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                ),
+                child: Text('Continue'),
+              ),
             ),
           ],
         ),

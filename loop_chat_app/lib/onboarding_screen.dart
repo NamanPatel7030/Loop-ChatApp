@@ -14,12 +14,23 @@ class OnboardingScreen extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  Text(
-                    'LOOP',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  Image.asset(
+                    'assets/images/loop_logo.png',  // Add the image path for your logo
+                    height: 100,
                   ),
                   SizedBox(height: 10),
-                  Image.asset('assets/onboarding_image.png', height: 150), // replace with actual image
+                  Text(
+                    'LOOP',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Image.asset(
+                    'assets/images/onboarding_image.png',  // Replace with your image path
+                    height: 150,
+                  ),
                   SizedBox(height: 20),
                   Text(
                     "Let's talk with your friends and family wherever and whenever",
@@ -30,6 +41,7 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
             Spacer(),
+            // Updated ElevatedButton with custom color
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -49,10 +61,12 @@ class OnboardingScreen extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,  // Black background color for the button
+                foregroundColor: Colors.white,  // White text color for the button
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 120),
               ),
               child: Text('Continue with phone'),
             ),

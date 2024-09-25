@@ -1,62 +1,60 @@
 import 'package:flutter/material.dart';
 
-class OtpVerificationScreen extends StatelessWidget {
+class VerificationCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Verification Code'),
+        title: Text('Back'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Bold text for "OTP"
             Text(
-              'Enter code',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'We\'ve sent the code via SMS to +62 999 9999 000',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-            SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                for (var i = 0; i < 4; i++)
-                  SizedBox(
-                    width: 50,
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      maxLength: 1,
-                      decoration: InputDecoration(
-                        counterText: '',
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-            Spacer(),
-            Center(
-              child: TextButton(
-                onPressed: () {},
-                child: Text('Resend code'),
+              'OTP',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24, // Adjust the size as needed
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                // Add action after entering OTP
-              },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+            SizedBox(height: 10), // Space between OTP and instruction text
+            // Instruction text
+            Text(
+              'We’ve sent the code via SMS to your phone number.',
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            // Code input field with rounded corners
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Enter 6-digit OTP code',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30), // Rounded corners
                 ),
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
               ),
-              child: Text('Continue'),
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(height: 20),
+            // Button that stretches to the edges
+            SizedBox(
+              width: double.infinity, // Full width
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle code verification
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black, // Black button background
+                  foregroundColor: Colors.white, // White button text
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                ),
+                child: Text('Continue'),
+              ),
             ),
           ],
         ),
